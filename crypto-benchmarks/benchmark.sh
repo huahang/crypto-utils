@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-mvn exec:java -Dexec.mainClass="im.chic.utils.crypto.benchmarks.Benchmark"
+mvn clean package exec:java -Dexec.mainClass="im.chic.utils.crypto.benchmarks.Benchmark"

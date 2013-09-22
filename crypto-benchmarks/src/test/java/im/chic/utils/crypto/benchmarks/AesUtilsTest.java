@@ -4,10 +4,13 @@ import com.google.common.io.ByteStreams;
 import im.chic.utils.crypto.AesUtils;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.io.*;
 import java.security.GeneralSecurityException;
 
+@RunWith(JUnit4.class)
 public class AesUtilsTest {
 
     @Test

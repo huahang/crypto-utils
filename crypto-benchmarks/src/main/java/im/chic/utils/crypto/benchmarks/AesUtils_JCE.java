@@ -32,7 +32,6 @@ public class AesUtils_JCE {
         return new CipherInputStream(inputStream, cipher);
     }
 
-
     public static OutputStream encrypt(OutputStream outputStream, byte[] key, byte[] iv) throws GeneralSecurityException {
         checkNotNull(outputStream);
         checkNotNull(key);

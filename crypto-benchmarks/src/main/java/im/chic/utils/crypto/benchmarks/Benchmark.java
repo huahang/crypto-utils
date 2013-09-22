@@ -9,5 +9,9 @@ public class Benchmark {
         System.out.println(AesBenchmark.runAesEcbPkcs5());
         System.out.println(AesBenchmark.runAesCbcPkcs5_JCE());
         System.out.println(AesBenchmark.runAesCbcPkcs5());
+        System.out.println(Rc4Benchmark.runRc4_JCE());
+        System.out.println(Rc4Benchmark.runRc4());
+        System.out.println(DigestBenchmark.runSha1_JCE());
+        System.out.println(DigestBenchmark.runSha1());
     }
 }
