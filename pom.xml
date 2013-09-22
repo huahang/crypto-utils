@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>im.chic.crypto</groupId>
+    <artifactId>crypto-utils-root</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <sc-light-jdk15on.version>1.47.0.3</sc-light-jdk15on.version>
+        <guava.version>15.0</guava.version>
+        <junit.version>4.11</junit.version>
+        <caliper.version>1.0-beta-SNAPSHOT</caliper.version>
+    </properties>
+
+    <modules>
+        <module>crypto-benchmarks</module>
+        <module>crypto-utils</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- project dependencies -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>crypto-utils</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- 3rd party dependencies -->
+            <dependency>
+                <groupId>com.madgag</groupId>
+                <artifactId>sc-light-jdk15on</artifactId>
+                <version>${sc-light-jdk15on.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <!-- test dependencies -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
