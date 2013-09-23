@@ -7,9 +7,10 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 
 public class DigestBenchmark {
-    // 8 Megabytes * 128 Rounds = 1 Gigabyte
-    static final int SIZE = 8 * 1024 * 1024;
-    static final int ROUND = 128;
+
+    // 1 Megabytes * 100 Rounds = 100 Megabytes
+    static final int SIZE = 1 * 1024 * 1024;
+    static final int ROUND = 100;
 
     public static String runSha1() throws IOException, GeneralSecurityException {
         String message = "SHA1 SC\n";
@@ -26,8 +27,8 @@ public class DigestBenchmark {
         long t1 = System.nanoTime();
         long duration = t1 - t0;
         double sec = (double) duration / 1000.0f / 1000.0f / 1000.0f;
-        double rate = 1024.0f / sec;
-        message += String.format("1G data hashed in %f seconds. %f MB/s.\n", sec, rate);
+        double rate = 100.0f / sec;
+        message += String.format("100M data hashed in %f seconds. %f MB/s.\n", sec, rate);
 
         return message;
     }
@@ -47,8 +48,8 @@ public class DigestBenchmark {
         long t1 = System.nanoTime();
         long duration = t1 - t0;
         double sec = (double) duration / 1000.0f / 1000.0f / 1000.0f;
-        double rate = 1024.0f / sec;
-        message += String.format("1G data hashed in %f seconds. %f MB/s.\n", sec, rate);
+        double rate = 100.0f / sec;
+        message += String.format("100M data hashed in %f seconds. %f MB/s.\n", sec, rate);
 
         return message;
     }

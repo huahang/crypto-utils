@@ -18,6 +18,7 @@
 
     <modules>
         <module>crypto-benchmarks</module>
+        <module>crypto-benchmarks-android</module>
         <module>crypto-utils</module>
     </modules>
 
@@ -27,6 +28,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>crypto-utils</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>crypto-benchmarks</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- 3rd party dependencies -->

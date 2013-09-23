@@ -8,9 +8,9 @@ import java.security.GeneralSecurityException;
 
 public class AesBenchmark {
 
-    // 8 Megabytes * 128 Rounds = 1 Gigabyte
-    static final int SIZE = 8 * 1024 * 1024;
-    static final int ROUND = 128;
+    // 1 Megabytes * 100 Rounds = 100 Megabytes
+    static final int SIZE = 1 * 1024 * 1024;
+    static final int ROUND = 100;
 
     public static String runAesEcbPkcs5() throws IOException, GeneralSecurityException {
         String message = "AES/ECB/PKCS5Padding SC\n";
@@ -23,7 +23,7 @@ public class AesBenchmark {
 
         long t0 = System.nanoTime();
         for (int i = 0; i < ROUND; ++i) {
-            byteArrayOutputStream = new ByteArrayOutputStream();
+            byteArrayOutputStream.reset();
             cipherOutputStream = AesUtils.encrypt(byteArrayOutputStream, key);
             cipherOutputStream.write(bytes);
             cipherOutputStream.close();
@@ -33,21 +33,22 @@ public class AesBenchmark {
         long t1 = System.nanoTime();
         long duration = t1 - t0;
         double sec = (double) duration / 1000.0f / 1000.0f / 1000.0f;
-        double rate = 1024.0f / sec;
-        message += String.format("1G data encrypted in %f seconds. %f MB/s.\n", sec, rate);
+        double rate = 100.0f / sec;
+        message += String.format("100M data encrypted in %f seconds. %f MB/s.\n", sec, rate);
 
         byte[] cipherData = byteArrayOutputStream.toByteArray();
+        byte[] buffer = new byte[cipherData.length * 2];
         t0 = System.nanoTime();
         for (int i = 0; i < ROUND; ++i) {
             InputStream inputStream = new ByteArrayInputStream(cipherData);
             InputStream cipherInputStream = AesUtils.decrypt(inputStream, key);
-            dummy |= ByteStreams.toByteArray(cipherInputStream).length;
+            dummy |= ByteStreams.read(cipherInputStream, buffer, 0, buffer.length);
         }
         t1 = System.nanoTime();
         duration = t1 - t0;
         sec = (double) duration / 1000.0f / 1000.0f / 1000.0f;
-        rate = 1024.0f / sec;
-        message += String.format("1G data decrypted in %f seconds. %f MB/s.\n", sec, rate);
+        rate = 100.0f / sec;
+        message += String.format("100M data decrypted in %f seconds. %f MB/s.\n", sec, rate);
 
         return message;
     }
@@ -63,7 +64,7 @@ public class AesBenchmark {
 
         long t0 = System.nanoTime();
         for (int i = 0; i < ROUND; ++i) {
-            byteArrayOutputStream = new ByteArrayOutputStream();
+            byteArrayOutputStream.reset();
             cipherOutputStream = AesUtils_JCE.encrypt(byteArrayOutputStream, key);
             cipherOutputStream.write(bytes);
             cipherOutputStream.close();
@@ -73,21 +74,22 @@ public class AesBenchmark {
         long t1 = System.nanoTime();
         long duration = t1 - t0;
         double sec = (double) duration / 1000.0f / 1000.0f / 1000.0f;
-        double rate = 1024.0f / sec;
-        message += String.format("1G data encrypted in %f seconds. %f MB/s.\n", sec, rate);
+        double rate = 100.0f / sec;
+        message += String.format("100M data encrypted in %f seconds. %f MB/s.\n", sec, rate);
 
         byte[] cipherData = byteArrayOutputStream.toByteArray();
+        byte[] buffer = new byte[cipherData.length*2];
         t0 = System.nanoTime();
         for (int i = 0; i < ROUND; ++i) {
             InputStream inputStream = new ByteArrayInputStream(cipherData);
             InputStream cipherInputStream = AesUtils_JCE.decrypt(inputStream, key);
-            dummy |= ByteStreams.toByteArray(cipherInputStream).length;
+            dummy |= ByteStreams.read(cipherInputStream, buffer, 0, buffer.length);
         }
         t1 = System.nanoTime();
         duration = t1 - t0;
         sec = (double) duration / 1000.0f / 1000.0f / 1000.0f;
-        rate = 1024.0f / sec;
-        message += String.format("1G data decrypted in %f seconds. %f MB/s.\n", sec, rate);
+        rate = 100.0f / sec;
+        message += String.format("100M data decrypted in %f seconds. %f MB/s.\n", sec, rate);
 
         return message;
     }
@@ -104,7 +106,7 @@ public class AesBenchmark {
 
         long t0 = System.nanoTime();
         for (int i = 0; i < ROUND; ++i) {
-            byteArrayOutputStream = new ByteArrayOutputStream();
+            byteArrayOutputStream.reset();
             cipherOutputStream = AesUtils.encrypt(byteArrayOutputStream, key, iv);
             cipherOutputStream.write(bytes);
             cipherOutputStream.close();
@@ -114,21 +116,22 @@ public class AesBenchmark {
         long t1 = System.nanoTime();
         long duration = t1 - t0;
         double sec = (double) duration / 1000.0f / 1000.0f / 1000.0f;
-        double rate = 1024.0f / sec;
-        message += String.format("1G data encrypted in %f seconds. %f MB/s.\n", sec, rate);
+        double rate = 100.0f / sec;
+        message += String.format("100M data encrypted in %f seconds. %f MB/s.\n", sec, rate);
 
         byte[] cipherData = byteArrayOutputStream.toByteArray();
+        byte[] buffer = new byte[cipherData.length*2];
         t0 = System.nanoTime();
         for (int i = 0; i < ROUND; ++i) {
             InputStream inputStream = new ByteArrayInputStream(cipherData);
             InputStream cipherInputStream = AesUtils.decrypt(inputStream, key, iv);
-            dummy |= ByteStreams.toByteArray(cipherInputStream).length;
+            dummy |= ByteStreams.read(cipherInputStream, buffer, 0, buffer.length);
         }
         t1 = System.nanoTime();
         duration = t1 - t0;
         sec = (double) duration / 1000.0f / 1000.0f / 1000.0f;
-        rate = 1024.0f / sec;
-        message += String.format("1G data decrypted in %f seconds. %f MB/s.\n", sec, rate);
+        rate = 100.0f / sec;
+        message += String.format("100M data decrypted in %f seconds. %f MB/s.\n", sec, rate);
 
         return message;
     }
@@ -145,7 +148,7 @@ public class AesBenchmark {
 
         long t0 = System.nanoTime();
         for (int i = 0; i < ROUND; ++i) {
-            byteArrayOutputStream = new ByteArrayOutputStream();
+            byteArrayOutputStream.reset();
             cipherOutputStream = AesUtils_JCE.encrypt(byteArrayOutputStream, key, iv);
             cipherOutputStream.write(bytes);
             cipherOutputStream.close();
@@ -155,21 +158,22 @@ public class AesBenchmark {
         long t1 = System.nanoTime();
         long duration = t1 - t0;
         double sec = (double) duration / 1000.0f / 1000.0f / 1000.0f;
-        double rate = 1024.0f / sec;
-        message += String.format("1G data encrypted in %f seconds. %f MB/s.\n", sec, rate);
+        double rate = 100.0f / sec;
+        message += String.format("100M data encrypted in %f seconds. %f MB/s.\n", sec, rate);
 
         byte[] cipherData = byteArrayOutputStream.toByteArray();
+        byte[] buffer = new byte[cipherData.length*2];
         t0 = System.nanoTime();
         for (int i = 0; i < ROUND; ++i) {
             InputStream inputStream = new ByteArrayInputStream(cipherData);
             InputStream cipherInputStream = AesUtils_JCE.decrypt(inputStream, key, iv);
-            dummy |= ByteStreams.toByteArray(cipherInputStream).length;
+            dummy |= ByteStreams.read(cipherInputStream, buffer, 0, buffer.length);
         }
         t1 = System.nanoTime();
         duration = t1 - t0;
         sec = (double) duration / 1000.0f / 1000.0f / 1000.0f;
-        rate = 1024.0f / sec;
-        message += String.format("1G data decrypted in %f seconds. %f MB/s.\n", sec, rate);
+        rate = 100.0f / sec;
+        message += String.format("100M data decrypted in %f seconds. %f MB/s.\n", sec, rate);
 
         return message;
     }
