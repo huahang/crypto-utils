@@ -16,6 +16,14 @@
         <caliper.version>1.0-beta-SNAPSHOT</caliper.version>
     </properties>
 
+    <licenses>
+        <license>
+            <name>Apache License Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <modules>
         <module>crypto-benchmarks</module>
         <module>crypto-utils</module>
@@ -53,5 +61,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
 
 </project>
