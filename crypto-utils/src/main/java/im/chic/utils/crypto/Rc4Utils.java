@@ -74,7 +74,7 @@ public class Rc4Utils {
      *
      * @param data data bytes to be decrypted
      * @param key  rc4 key (40..2048 bits)
-     * @return
+     * @return decrypted data bytes
      */
     public static byte[] decrypt(byte[] data, byte[] key) {
         checkNotNull(data);
