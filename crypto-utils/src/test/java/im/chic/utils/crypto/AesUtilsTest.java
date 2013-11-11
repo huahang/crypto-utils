@@ -31,6 +31,11 @@ public class AesUtilsTest {
         }
     }
 
+    @Test
+    public void testAes2() throws GeneralSecurityException, InvalidCipherTextException, IOException {
+        testAesCbcPkcs5(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 3, 3, 3});
+    }
+
     public void testAesEcbPkcs5(byte[] data) throws GeneralSecurityException, InvalidCipherTextException, IOException {
         // generate key
         byte[] keyBytes = AesUtils.generateKey();
