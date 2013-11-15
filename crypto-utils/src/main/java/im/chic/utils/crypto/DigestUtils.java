@@ -29,8 +29,50 @@ public class DigestUtils {
      * @throws IOException On error reading from the stream.
      */
     public static byte[] sha1(InputStream is) throws IOException {
+        return dgst(is, new SHA1Digest());
+    }
+
+    /**
+     * Calculates the SHA-1 digest and returns the value as a hex string.
+     *
+     * @param is input stream
+     * @return SHA-1 digest as a hex string
+     * @throws IOException On error reading from the stream
+     */
+    public static String sha1Hex(InputStream is) throws IOException {
+        return dgstHex(is, new SHA1Digest());
+    }
+
+    /**
+     * Calculates the SHA-1 digest and returns the value as a byte[].
+     *
+     * @param input input bytes
+     * @return SHA-1 digest as a byte[]
+     */
+    public static byte[] sha1(byte[] input) {
+        return dgst(input, new SHA1Digest());
+    }
+
+    /**
+     * Calculates the SHA-1 digest and returns the value as a hex string.
+     *
+     * @param input input bytes
+     * @return SHA-1 digest as a hex string
+     */
+    public static String sha1Hex(byte[] input) {
+        return dgstHex(input, new SHA1Digest());
+    }
+
+    /**
+     * Calculates digest and returns the value as a byte[].
+     *
+     * @param is     input stream
+     * @param digest digest algorithm
+     * @return digest as a byte[]
+     * @throws IOException On error reading from the stream.
+     */
+    public static byte[] dgst(InputStream is, Digest digest) throws IOException {
         checkNotNull(is);
-        Digest digest = new SHA1Digest();
         int n = 0;
         byte[] buffer = new byte[BUFFER_SIZE];
         while (n >= 0) {
@@ -45,27 +87,28 @@ public class DigestUtils {
     }
 
     /**
-     * Calculates the SHA-1 digest and returns the value as a hex string.
+     * Calculates digest and returns the value as a hex string.
      *
-     * @param is input stream
-     * @return SHA-1 digest as a hex string
+     * @param is     input stream
+     * @param digest digest algorithm
+     * @return digest as a hex string
      * @throws IOException On error reading from the stream
      */
-    public static String sha1Hex(InputStream is) throws IOException {
+    public static String dgstHex(InputStream is, Digest digest) throws IOException {
         checkNotNull(is);
-        byte[] sha1Bytes = sha1(is);
-        return BaseEncoding.base16().encode(sha1Bytes);
+        byte[] dgstBytes = dgst(is, digest);
+        return BaseEncoding.base16().encode(dgstBytes);
     }
 
     /**
-     * Calculates the SHA-1 digest and returns the value as a byte[].
+     * Calculates digest and returns the value as a byte[].
      *
-     * @param input input bytes
-     * @return SHA-1 digest as a byte[]
+     * @param input  input bytes
+     * @param digest digest algorithm
+     * @return digest as a byte[]
      */
-    public static byte[] sha1(byte[] input) {
+    public static byte[] dgst(byte[] input, Digest digest) {
         checkNotNull(input);
-        Digest digest = new SHA1Digest();
         digest.update(input, 0, input.length);
         byte[] result = new byte[digest.getDigestSize()];
         digest.doFinal(result, 0);
@@ -73,15 +116,15 @@ public class DigestUtils {
     }
 
     /**
-     * Calculates the SHA-1 digest and returns the value as a hex string.
+     * Calculates digest and returns the value as a hex string.
      *
-     * @param input input bytes
-     * @return SHA-1 digest as a hex string
+     * @param input  input bytes
+     * @param digest digest algorithm
+     * @return digest as a hex string
      */
-    public static String sha1Hex(byte[] input) {
+    public static String dgstHex(byte[] input, Digest digest) {
         checkNotNull(input);
-        byte[] sha1Bytes = sha1(input);
-        return BaseEncoding.base16().encode(sha1Bytes);
+        byte[] dgstBytes = dgst(input, digest);
+        return BaseEncoding.base16().encode(dgstBytes);
     }
-
 }
