@@ -11,7 +11,7 @@
 
     <properties>
         <sc-light-jdk15on.version>1.47.0.3</sc-light-jdk15on.version>
-        <guava.version>15.0</guava.version>
+        <guava.version>14.0.1</guava.version>
         <junit.version>4.11</junit.version>
         <caliper.version>1.0-beta-SNAPSHOT</caliper.version>
     </properties>
@@ -62,5 +62,22 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

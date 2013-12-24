@@ -1,11 +1,14 @@
 package im.chic.utils.crypto;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.BaseEncoding;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Closer;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.spongycastle.crypto.StreamCipher;
 
 import java.io.*;
 
@@ -80,4 +83,19 @@ public class Rc4Test {
         }
     }
 
+    @Test
+    public void testRc4Drop() {
+        String security = "RbotCX+Rseavyum82S6p8t1a6MvD5XTupx6bqUR+zck=";
+        byte[] securityBytes = BaseEncoding.base64().decode(security);
+
+        String data = "OkSiMbE40ve1t6t6jZXyDugJz3Q=";
+        byte[] dataBytes = data.getBytes(Charsets.UTF_8);
+
+        byte[] encryptedDataBytes = new byte[dataBytes.length];
+        StreamCipher rc4Drop = Rc4Utils.createRC4DropCipher(securityBytes, 1024);
+        rc4Drop.processBytes(dataBytes, 0, dataBytes.length, encryptedDataBytes, 0);
+
+        Assert.assertEquals("AIw2+eGPJBQt5j/P+754Z8Q6M/e4RGoGTYhEGQ==",
+                BaseEncoding.base64().encode(encryptedDataBytes));
+    }
 }

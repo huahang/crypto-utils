@@ -11,6 +11,7 @@ import org.spongycastle.crypto.params.KeyParameter;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -102,6 +103,25 @@ public class Rc4Utils {
         StreamCipher rc4 = new RC4Engine();
         rc4.init(false, new KeyParameter(key));
         return new CipherInputStream(inputStream, rc4);
+    }
+
+
+    /**
+     * Creates an RC4-drop cipher
+     *
+     * @param key  rc4 key (40..2048 bits)
+     * @param drop number of bytes to drop
+     * @return decrypted input stream
+     */
+    public static StreamCipher createRC4DropCipher(byte[] key, int drop) {
+        checkArgument(key.length >= 5 && key.length <= 256);
+        checkArgument(drop > 0);
+        RC4Engine rc4Engine = new RC4Engine();
+        rc4Engine.init(true, new KeyParameter(key));
+        byte[] dropBytes = new byte[drop];
+        Arrays.fill(dropBytes, (byte) 0);
+        rc4Engine.processBytes(dropBytes, 0, dropBytes.length, dropBytes, 0);
+        return rc4Engine;
     }
 
 }
