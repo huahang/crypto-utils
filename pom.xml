@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -39,10 +40,9 @@
     </developers>
 
     <properties>
-        <sc-light-jdk15on.version>1.47.0.3</sc-light-jdk15on.version>
-        <guava.version>14.0.1</guava.version>
+        <spongycastle.version>1.50.0.0</spongycastle.version>
+        <guava.version>16.0.1</guava.version>
         <junit.version>4.11</junit.version>
-        <caliper.version>1.0-beta-SNAPSHOT</caliper.version>
     </properties>
 
     <modules>
@@ -64,9 +64,9 @@
             </dependency>
             <!-- 3rd party dependencies -->
             <dependency>
-                <groupId>com.madgag</groupId>
-                <artifactId>sc-light-jdk15on</artifactId>
-                <version>${sc-light-jdk15on.version}</version>
+                <groupId>com.madgag.spongycastle</groupId>
+                <artifactId>core</artifactId>
+                <version>${spongycastle.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
