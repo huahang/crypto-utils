@@ -40,7 +40,7 @@
 
     <properties>
         <spongycastle.version>1.51.0.0</spongycastle.version>
-        <guava.version>16.0.1</guava.version>
+        <guava.version>18.0</guava.version>
         <junit.version>4.11</junit.version>
     </properties>
 
