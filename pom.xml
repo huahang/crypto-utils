@@ -10,7 +10,7 @@
 
     <groupId>im.chic.crypto</groupId>
     <artifactId>crypto-utils-root</artifactId>
-    <version>1.1.9-SNAPSHOT</version>
+    <version>1.2.0</version>
     <packaging>pom</packaging>
 
     <name>Crypto Utils</name>
